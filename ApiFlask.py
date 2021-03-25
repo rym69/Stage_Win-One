@@ -1,8 +1,9 @@
+import os
+from tika import parser
+from flask import Flask, render_template, request, redirect, url_for
 from tika import parser # pip install tika
-#import regex
 import re
 import json
-
 
 
 def get_age(words):
@@ -23,12 +24,6 @@ def get_numero(words):
     for word in words:
         if hasNumbers(word):
             return word
-
-# def get_adress(words):
-#     regex = re.apply_constraint("^(\d+[a-z]?)+\s+(\d+)+\s+(.+(?=\W))+\s+(.*)")
-#     for word in words:
-#         if word.match(regex):
-#             return word
 
 
 def get_email(words):
@@ -113,21 +108,52 @@ def get_winone(words):
 # chronologies_json = json.dumps(get_winone(cv_words2))
 print("*************************************")
 # print(chronologies_json)
-# Regex detect email, postal adress
 
-def parse_cv():
-    raw = parser.from_file('20181127_CV_WO_M_DIAW.pdf')
+def parse_cv(cv_filename):
+    raw = parser.from_file(cv_filename)
     cv_words =  raw['content'].split("\n")
     cv_words2 = []
     for word in cv_words:
         if len(word) > 1:
             cv_words2.append(word)
     # print(cv_words2)    
-    cv_final  =  dict()
-    cv_final["Nom"] = cv_words2[2]
-    cv_final["email"] = get_email(cv_words2)
-    cv_final["compétence"] = get_competence(cv_words2)
-    cv_final["winOne"] = get_winone(cv_words2)
-    cv_final_json = json.dumps(cv_final)
-    return cv_final_json
-print(parse_cv())
+    # cv_final  = "" # dict()
+    email =get_email(cv_words2)
+    age = get_age(cv_words2)
+    numero=get_numero(cv_words2)
+    # cv_final +="L'adresse est :", get_adress(cv_words2)
+    competence=str(get_competence(cv_words2))
+    formation=str(get_formations(cv_words2))
+    chronologie=str(get_chronologie(cv_words2))
+    winOne=str(get_winone(cv_words2))
+    nom = cv_words2[2]
+    return (email, age, numero, nom,competence,formation,chronologie, winOne)
+
+app = Flask(__name__)
+data =  ""
+@app.route('/')
+def index():
+    return render_template('index.html', data=data)
+
+@app.route('/')
+def index_cv(data2):
+    return render_template('index.html', data=data2)
+
+@app.route('/', methods=['POST'])
+def upload_file():
+    uploaded_file = request.files['file']
+    if uploaded_file.filename != '':
+        uploaded_file.save(uploaded_file.filename)
+        email, age, numero, nom, competence, formation, chronologie, winOne = parse_cv(uploaded_file.filename)
+        print(data)
+    # return redirect(url_for('index_cv', cv_data="YESS"))
+    return render_template("cv_render.html",competence=competence, email=email, age=age, numero=numero, nom=nom, formation=formation, chronologie=chronologie, winOne=winOne)
+
+
+
+if __name__ == "__main__":
+    app.run()
+
+app.run(port=5000)
+
+
