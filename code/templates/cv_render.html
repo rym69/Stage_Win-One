@@ -1,10 +1,118 @@
-<h1>CV Généré</h1>
-<h3>{{ nom }}</h3>
-<p><b>L'email est :</b>  {{ email }}</p>
-<p><b>L'age est  :</b> {{ age }}</p>
-<p><b>Le numéro est :</b> {{ numero }}</p>
-<p><b>Les competences sont :</b> {{ competence }}</p>
-<p><b>Les formations sont :</b> {{ formation }}</p>
-<p><b>La chronologie :</b> {{ chronologie }}</p>
-<p><b>L'analyse Win One :</b> {{ winOne }}</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../static/favicon.ico" />
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/stylesCv.css" />
+    <title>Win-One - {{ nom }}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-xs navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+          <img
+            src="/static/images/Logo-web-Win-one.png"
+            class="img-logo"
+            alt="Logo Win-one"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a href="/" class="nav-link">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#formCV">Ajouter un CV</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="title text-center mt-4">CV Généré</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3 class="subtitle text-center">{{ nom }}</h3>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Email</h5>
+                <p class="card-text">
+                    {{ email }}
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Âge</h5>
+                <p class="card-text">
+                    {{ age }}
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Numéro</h5>
+                <p class="card-text">
+                    {{ numero }}
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Compétences</h5>
+                <p class="card-text">
+                    {{ competence }}
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Formations</h5>
+                <p class="card-text">
+                    {{ formation }}
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Chronologie</h5>
+                <p class="card-text">
+                    {{ chronologie }}
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Analyse Win-one</h5>
+                <p class="card-text">
+                    {{ winOne }}
+                </p>
+            </div>
+        </div>
+      </div>
 
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>

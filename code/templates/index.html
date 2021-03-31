@@ -1,16 +1,80 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="fr">
   <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="../static/favicon.ico" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/styles.css" />
     <title>Télécharger le CV</title>
   </head>
   <body>
-    <h1>Télécharger le CV</h1>
-    <form method="POST" action="" enctype="multipart/form-data">
-      <p><input type="file" name="file"></p>
-      <p><input type="submit" value="Submit"></p>
-    </form>    
-    <div id='info_section'>
+    <nav class="navbar navbar-expand-xs navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img
+          src="/static/images/Logo-web-Win-one.png"
+          class="img-logo"
+          alt="Logo Win-one"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a href="/" class="nav-link">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#formCV">Ajouter un CV</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1 class="text-center title my-5">Télécharger le CV</h1>
+        </div>
+      </div>
+      <div class="row mx-auto mt-5">
+        <div class="col">
+          <form method="POST" enctype="multipart/form-data" class="d-flex flex-column justify-content-center align-items-center">
+            <div
+              class="drop-zone p-2 d-flex justify-content-center align-items-center text-center text-white"
+            >
+              <span class="drop-zone__prompt"
+                >Déplacer un CV ici ou cliquez pour sélectionner un CV.</span
+              >
+              <input
+                type="file"
+                name="file"
+                id="file"
+                class="drop-zone__input d-none"
+                accept=".pdf"
+              />
+            </div>
+            <button type="submit" class="btn btn-outline-light mt-4">Envoyer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="info_section">
       <p>{{ data }}</p>
-  </div>
+    </div>
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
   </body>
 </html>
