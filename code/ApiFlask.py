@@ -4,6 +4,23 @@ from flask import Flask, render_template, request, redirect, url_for
 from tika import parser # pip install tika
 import re
 import json
+from mongoengine import connect, Document, ListField, StringField, URLField
+
+
+connect(db='pythonTest', host='localhost', port=27017)
+
+class CV(Document):
+    first_name = StringField(required=True)
+    last_name = StringField(required=True)
+
+user = CV(
+    first_name = "Imad",
+    last_name = "Elmahrad"
+)
+user.save()
+
+
+
 
 
 def get_age(words):
