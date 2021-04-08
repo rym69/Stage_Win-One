@@ -2,9 +2,13 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="../static/favicon.ico" />
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../static/css/styles.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/favicon.ico" />
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>Télécharger le CV</title>
   </head>
   <body>
@@ -31,10 +35,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a href="/" class="nav-link">Accueil</a>
+            <a href="#ajouterCV" class="nav-link">Ajouter un CV</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#formCV">Ajouter un CV</a>
+            <a href="#search" class="nav-link">Trouver un CV</a>
           </li>
         </ul>
       </div>
@@ -43,12 +47,18 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h1 class="text-center title my-5">Télécharger le CV</h1>
+          <h1 class="text-center title my-5" id="ajouterCV">
+            Télécharger le CV
+          </h1>
         </div>
       </div>
       <div class="row mx-auto mt-5">
         <div class="col">
-          <form method="POST" enctype="multipart/form-data" class="d-flex flex-column justify-content-center align-items-center">
+          <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
             <div
               class="drop-zone p-2 d-flex justify-content-center align-items-center text-center text-white"
             >
@@ -63,7 +73,9 @@
                 accept=".pdf"
               />
             </div>
-            <button type="submit" class="btn btn-outline-light mt-4">Envoyer</button>
+            <button type="submit" class="btn btn-outline-light mt-4">
+              Envoyer
+            </button>
           </form>
         </div>
       </div>
@@ -72,9 +84,48 @@
     <div id="info_section">
       <p>{{ data }}</p>
     </div>
-    <script src="../static/js/script.js"></script>
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/popper.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
+
+    <div id="search">
+      <button type="button" class="close">×</button>
+      <form
+        action="/getCV"
+        method="GET"
+        enctype="multipart/form-data"
+        id="searchForm"
+        target="_blank"
+      >
+        <input
+          type="search"
+          value=""
+          placeholder="Entrer le nom du condidat en majuscules"
+          id="inputSearch"
+          name="nom"
+        />
+        <button type="submit" class="btn btn-primary">Trouver un CV</button>
+      </form>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script>
+      $(function () {
+        $('a[href="#search"]').on("click", function (event) {
+          event.preventDefault();
+          $("#search").addClass("open");
+          $('#search > form > input[type="search"]').focus();
+        });
+
+        $("#search, #search button.close").on("click keyup", function (event) {
+          if (
+            event.target == this ||
+            event.target.className == "close" ||
+            event.keyCode == 27
+          ) {
+            $(this).removeClass("open");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
