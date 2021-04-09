@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 ##scrapinf appel d'offre sur indeed secteur banque et assurances
 
 def extract (page):
-    headers= {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
+    headers= {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36'}
     url = f'https://fr.indeed.com/emplois?q=banque%20assurance&l=france&advn=9344337646366269&vjk=e81eb77f7922d735={page}'
     r= requests.get(url, headers)
     soup = BeautifulSoup(r.content, 'html.parser')
@@ -42,11 +42,11 @@ def transform(soup):
 
 joblist = []
 
-for i in range(0,100,20):
-    print(f'Getting page, [i]')
+for i in range(0,1000,20):
+    print(f'Getting page, {i}')
     c = extract(0)
     transform(c)
     
 df = pd.DataFrame(joblist)
 print(df.head())
-df.to_csv('jobsBanque.csv')
+df.to_csv('jobsBanque7.csv')
